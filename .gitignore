@@ -1,3 +1,6 @@
 # Local Log files
 tests/logs/
 tests/tank_errors.log
+tests/config.yml
+tests/data.txt
+tests/ammo.txt

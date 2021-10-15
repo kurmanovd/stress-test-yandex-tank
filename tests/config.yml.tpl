@@ -1,6 +1,6 @@
 phantom:
   address: $APP_HOST:$APP_PORT
-  ssl: false                 # Enable ssl. Default: False
+  ssl: $APP_SEC             # Enable ssl. Default: False
   ammofile: ammo.txt
   # ammo_type: uri
   load_profile:

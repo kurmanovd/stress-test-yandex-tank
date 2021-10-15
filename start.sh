@@ -6,6 +6,7 @@ set -e
 export APP_METOD="POST"
 export APP_HOST="myapp.dev"
 export APP_PORT="80"
+export APP_SEC="false"
 export APP_SCHEDULE="step(10, 30, 5, 5)"
 export APP_URL="/url"
 export APP_TEST_TAG="my_tag"
@@ -14,7 +15,6 @@ export APP_ACCESS_TOKEN=""
 
 GET_TOKEN=false
 GEN_AMMO=false
-RUN_TEST=false
 
 err() {
     echo "[$(date +'%Y-%m-%d %H:%M:%S%z')]: $@" >&2
@@ -56,16 +56,6 @@ then
     fi
 fi
 
-if read -p "Run stress test?[y\n]: " reply
-then
-    if [ $reply == "y" ]
-    then
-        RUN_TEST=true
-    else
-        RUN_TEST=false
-    fi
-fi
-
 # Get user access_token
 ${GET_TOKEN} && log "GET User access token" && getToken
 
@@ -78,17 +68,14 @@ ${GEN_AMMO} && log "Data preparation" && rm -f ./tests/data.txt && envsubst < ./
 # Recharging 
 ${GEN_AMMO} && log "Recharging ammo file" && cat ./tests/data.txt | python3 ammo_generator.py > ./tests/ammo.txt 
 
-if [ RUN_TEST ]
-then
-    log "Start Influx"
-    docker-compose up -d influx
+log "Start Influx"
+docker-compose up -d influx
 
-    log "Start grafana"
-    docker-compose up -d grafana
+log "Start grafana"
+docker-compose up -d grafana
 
-    log "Waiting... 5s"
-    sleep 5
+log "Waiting... 5s"
+sleep 5
 
-    log "Start load testing"
-    docker-compose run --rm tank -qc config.yml
-fi
+log "Start load testing"
+docker-compose run --rm tank -qc config.yml

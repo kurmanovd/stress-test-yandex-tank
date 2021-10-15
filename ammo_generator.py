@@ -11,7 +11,6 @@ def make_ammo(method, host, url, headers, case, token, body):
           "%s %s HTTP/1.1\r\n"
           "Host: %s\r\n"
           "%s\r\n"
-          "%s\r\n"
           "\r\n"
     )
 
