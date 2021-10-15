@@ -25,7 +25,7 @@ services:
       - ${PWD}/docker/grafana/data/dashboards:/var/lib/grafana/dashboards/
     environment:
       GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: Pa$$w0rd
+      GF_SECURITY_ADMIN_PASSWORD: admin
       GF_INSTALL_PLUGINS: "grafana-clock-panel,briangann-gauge-panel,natel-plotly-panel,grafana-simple-json-datasource"
       GF_AUTH_ANONYMOUS_ENABLED: "true"
 
