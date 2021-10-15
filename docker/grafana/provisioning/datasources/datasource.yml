@@ -1,0 +1,38 @@
+# config file version
+apiVersion: 1
+
+deleteDatasources:
+  - name: Influx
+    orgId: 1
+
+# list of datasources to insert/update depending
+# what's available in the database
+datasources:
+  # <string, required> name of the datasource. Required
+  - name: Influx
+    # <string, required> datasource type. Required
+    type: influxdb
+    # <string, required> access mode. proxy or direct (Server or Browser in the UI). Required
+    access: proxy
+    # <int> org id. will default to orgId 1 if not specified
+    orgId: 1
+    # <string> url
+    url: http://influx:8086
+    #url: http://gandivatesting_influx_1:8086
+    # <string> database name, if used
+    database: metrics
+    # <bool> mark as default datasource. Max one per org
+    isDefault: false
+    # <bool> allow users to edit datasources from the UI.
+    editable: true
+
+    # basicAuth: true
+    # user: admin
+    # secureJsonData:
+    #   password: Qw123456
+    # jsonData:
+    #   defaultBucket: metrics
+    #   httpMode: POST
+    #   organization: PROTON
+    #   version: Flux
+    #   token: LtDAUZPv1jAqS0GZK5vbLurPsVh_b3Qmnaw3PEf-41QaSAQmrKmjThiVvhPjF07t9dn_HM6S1mQ94Y1IzweJ8Q==
